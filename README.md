@@ -1,8 +1,8 @@
 # Next Level Week #8: Return
 
-![nlw-heat-impulse-logo](./.github/nlw-return.png)
+![nlw-heat-impulse-logo](.github/nlw-return.png)
 
-<p align="center">Aplicação WidGet completa</p>
+<p align="center">Aplicação WIDGET Completa Desenvolvida sobre a STACK do JAVASCRIPT</p>
 
 ## Trilha Impulse
 
