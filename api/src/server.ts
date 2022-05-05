@@ -1,9 +1,19 @@
 import express from 'express'
+import nodemailer from 'nodemailer'
 import { prisma } from './prisma'
 
 const app = express()
 
 app.use(express.json())
+
+const transport = nodemailer.createTransport({
+  host: "smtp.mailtrap.io",
+  port: 2525,
+  auth: {
+    user: "6309166e4e1790",
+    pass: "efdd99a8e5eea8"
+  }
+});
 
 app.post('/feedbacks', async (req, res) =>{
 
@@ -16,6 +26,17 @@ app.post('/feedbacks', async (req, res) =>{
       screenshot
     }
   })
+
+  await transport.sendMail({
+    from: 'Equipe Widget <oi@teste.com>',
+    to: 'Vitor Widget <vittorbassdev@gmail.com',
+    subject: 'Novo Feedback',
+    html: [
+      `<p> Tipo de Feedback: ${type}</p>`,
+      `<p> Comentário de Feedback ${comment}</p>`,
+    ].join('\n')
+  })
+
   return res.status(201).json({data : feedback})
 })
 
