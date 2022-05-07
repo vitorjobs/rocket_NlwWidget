@@ -19,6 +19,14 @@ export class SubmitFeedbackUseCase {
   async execute(request: SubmitFeedbackUseCaseRequest) {
     const {type, comment, screenshot} = request 
 
+    if(!type) {
+      throw new Error ('empty type field')
+    }
+
+    if(!comment) {
+      throw new Error ('empty comment field ')
+    }
+
     // VALIDAR FORMATO DA FOTO:
     if(screenshot && !screenshot.startsWith('data:image/png;base64')){
       throw new Error ('Invalid screenshot format')
