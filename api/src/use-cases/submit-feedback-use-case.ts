@@ -1,5 +1,6 @@
 // Envio de novo feedback para o banco
 
+import { MailAdapter } from "../adpters/mail-adapter"
 import { FeedbacksRepository } from "../repositories/Feedbacks-repository"
 
 interface SubmitFeedbackUseCaseRequest{
@@ -11,7 +12,8 @@ interface SubmitFeedbackUseCaseRequest{
 export class SubmitFeedbackUseCase {
 
   constructor(
-    private feedbacksRepository: FeedbacksRepository
+    private feedbacksRepository: FeedbacksRepository,
+    private mailAdapter: MailAdapter
   ){  }
 
   async execute(request: SubmitFeedbackUseCaseRequest) {
@@ -21,6 +23,15 @@ export class SubmitFeedbackUseCase {
       type,
       comment,
       screenshot,
+    })
+
+    await this.mailAdapter.sendMail({
+      subject: 'Novo Feedback - Inversion Dependency',
+      
+      body: [
+        `<p> Tipo de Feedback: ${type}</p>`,
+        `<p> Comentário de Feedback ${comment}</p>`,
+      ].join('\n')
     })
   }
 }
