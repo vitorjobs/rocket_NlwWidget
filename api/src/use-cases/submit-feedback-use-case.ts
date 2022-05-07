@@ -20,7 +20,6 @@ export class SubmitFeedbackUseCase {
     const {type, comment, screenshot} = request 
 
     // VALIDAR FORMATO DA FOTO:
-
     if(screenshot && !screenshot.startsWith('data:image/png;base64')){
       throw new Error ('Invalid screenshot format')
     }
